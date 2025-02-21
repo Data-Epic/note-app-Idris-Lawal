@@ -31,3 +31,17 @@ mytext = TextNote("I am happy", "2025-02-18")
 print(mytext.display())
 mytext1 = TextNote("Are you happy?")
 print(mytext1.display())
+
+class ReminderNote(Note):
+    def __init__(self, content, reminder_date, reminder_time, created_at=Note.default_date):
+        Note.__init__(self, content, created_at)
+        if isinstance(reminder_date, datetime):
+            self.reminder_date = reminder_date
+        else:
+            self.reminder_date = pd.to_datetime(reminder_date).date()
+        self.reminder_time = reminder_time
+    def display(self):
+        return(f"My ReminderNote {self.created_at}:\n {self.content} on {self.reminder_date} by {self.reminder_time}")
+
+myreminder = ReminderNote("Conference meeting", "2025-02-20", "4pm")
+print(myreminder.display())
