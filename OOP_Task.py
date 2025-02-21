@@ -45,3 +45,44 @@ class ReminderNote(Note):
 
 myreminder = ReminderNote("Conference meeting", "2025-02-20", "4pm")
 print(myreminder.display())
+
+#created Notes Manager
+class NotesManager:
+    def __init__(self):
+        self.notes = [] # list to store notes
+
+    def add_note(self, note_type, content, reminder_time=None):
+        self.note_type = note_type
+        self.content = content
+        self.reminder_time = reminder_time
+        self.new_note = self.note_type + ":" + " " + self.content + " " + "-" + " " + str(self.reminder_time)
+        self.notes.append(self.new_note)
+        return "successfully added"
+
+    def delete_note(self, note_id):
+        self.note_id = note_id
+        self.notes.pop(note_id-1)
+        print(f"note {self.note_id} successfully deleted")
+
+    def show_notes(self):
+        print(self.notes)
+
+    def search_notes(self, keyword):
+        for note in self.notes:
+            if keyword in note:
+                print(note)
+                break
+        else:
+            print("Note doesn't exist")
+
+#test Note Manager
+my_notes = NotesManager()
+my_notes.add_note("text", "Review OOP concept")
+my_notes.add_note("reminder", "Project deadline", "2025-03-10 10:00 AM")
+
+my_notes.show_notes()
+my_notes.search_notes("OOP")
+my_notes.search_notes("Project")
+my_notes.search_notes("Aim")
+my_notes.delete_note(1)
+my_notes.show_notes()
