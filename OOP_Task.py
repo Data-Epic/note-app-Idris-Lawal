@@ -16,3 +16,18 @@ class Note:
 
 mynote = Note("This is my note")
 print(mynote.display())
+
+# create Text Note inheriting from Note class with default date
+class TextNote(Note):
+    def __init__(self, content, created_at = Note.default_date):
+        if isinstance(content, str):            # ensure content is text-based
+            Note.__init__(self, content, created_at)
+        else:
+            raise ValueError("Content must be text-based!")
+    def display(self):
+        return(f"My TextNote created at {self.created_at}:\n{self.content}")
+
+mytext = TextNote("I am happy", "2025-02-18")
+print(mytext.display())
+mytext1 = TextNote("Are you happy?")
+print(mytext1.display())
